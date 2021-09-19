@@ -7,9 +7,9 @@
                  [metosin/muuntaja "0.6.8"]
                  [metosin/reitit "0.5.15"]
                  [metosin/ring-http-response "0.9.3"]
-                 [com.github.seancorfield/next.jdbc "1.2.659"]
+                 [com.github.seancorfield/next.jdbc "1.2.709"]
                  [org.clojure/clojure "1.10.3"]
-                 [org.postgresql/postgresql "42.2.19"]
+                 [org.postgresql/postgresql "42.2.23"]
                  [ring "1.9.4"]]
   :repl-options {:init-ns users.core}
   :main users.core)
