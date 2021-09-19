@@ -1,7 +1,6 @@
 # USERS
 
-clojure/reitit/next.jdbc で CRUD の練習。
-github の練習も兼ねる。
+private training clojure/reitit/next.jdbc and github.
 
 ## Usage
 
