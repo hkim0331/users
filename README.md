@@ -1,6 +1,7 @@
 # USERS
 
 clojure/reitit/next.jdbc で CRUD の練習。
+github の練習も兼ねる。
 
 ## Usage
 
@@ -15,7 +16,7 @@ $ http delete :3000/users login=acc
 
 ## License
 
-Copyright © 2021 FIXME
+Copyright © 2021 hkim0331
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
