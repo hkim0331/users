@@ -5,11 +5,13 @@
 * docker (docker-compose?)
 * VScode remote container
 * auth
-* Unreleased 404
+* 404 by click on Unreleased 
+
 
 ## [0.1.2] - 2021-09-19
-compare links? no need.
-but this is a training. should do.
+* compare links? no need. but this is a training. should do.
+### Added
+* buddy/buddy-hashers "1.8.1"
 
 ## [0.1.1] - 2021-09-19
 ### Changed

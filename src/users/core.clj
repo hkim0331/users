@@ -1,5 +1,6 @@
 (ns users.core
   (:require
+   [buddy.hashers :as hashers]
    [muuntaja.middleware :as muuntaja]
    [reitit.ring :as reitit]
    [ring.adapter.jetty :as jetty]
@@ -8,17 +9,19 @@
    [users.boundary :refer [create-user! update-user! find-user delete-user! list-users]])
  (:gen-class))
 
-
 (def routes
   [["/users"
     {:get
      (fn [_] (response/ok (list-users)))
      :post
      (fn [{params :body-params}]
-      (response/ok (create-user! params)))
+       (response/ok
+        (create-user! (update params :password hashers/derive))))
      :put
      (fn [{params :body-params}]
-      (response/ok (update-user! (params :login) params)))}]
+       (response/ok
+        (update-user! (params :login)
+                      (update params :password hashers/derive))))}]
    ["/users/:login"
     {:get
      (fn [{{:keys [login]} :path-params}]

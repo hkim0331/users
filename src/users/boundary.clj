@@ -15,8 +15,10 @@
 
 (def ^:private builder {:builder-fn rs/as-unqualified-lower-maps})
 
+;; protocol?
+
 (defn create-user! [params]
- (sql/insert! ds :users params builder))
+  (sql/insert! ds :users params builder))
 
 (defn find-user [login]
   (if-let [ret (sql/query ds ["select * from users where login=?" login] builder)]
