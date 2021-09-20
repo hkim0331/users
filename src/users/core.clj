@@ -1,3 +1,4 @@
+
 (ns users.core
   (:require
    [buddy.hashers :as hashers]
@@ -14,7 +15,8 @@
     {:get
      (fn [_] (response/ok (list-users)))
      :post
-     (fn [{params :body-params}]
+     (fn [params]
+       (println "req:" params)
        (response/ok
         (create-user! (update params :password hashers/derive))))
      :put
@@ -49,3 +51,4 @@
        wrap-reload)
    {:port 3000
     :join? false}))
+
