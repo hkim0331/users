@@ -1,4 +1,3 @@
-
 (ns users.core
   (:require
    [buddy.hashers :as hashers]
@@ -7,30 +6,30 @@
    [ring.adapter.jetty :as jetty]
    [ring.middleware.reload :refer [wrap-reload]]
    [ring.util.http-response :as response]
-   [users.boundary :refer [create-user! update-user! find-user delete-user! list-users]])
+   [users.db :as db])
  (:gen-class))
 
 (def routes
   [["/users"
     {:get
-     (fn [_] (response/ok (list-users)))
+     (fn [_] (response/ok (db/list-users)))
      :post
      (fn [params]
        (println "req:" params)
        (response/ok
-        (create-user! (update params :password hashers/derive))))
+        (db/create-user! (update params :password hashers/derive))))
      :put
      (fn [{params :body-params}]
        (response/ok
-        (update-user! (params :login)
+        (db/update-user! (params :login)
                       (update params :password hashers/derive))))}]
    ["/users/:login"
     {:get
      (fn [{{:keys [login]} :path-params}]
-       (response/ok (find-user login)))
+       (response/ok (db/find-user login)))
      :delete
      (fn [{{:keys [login]} :path-params}]
-       (response/ok (delete-user! login)))}]])
+       (response/ok (db/delete-user! login)))}]])
 
 (def handler
   (reitit/ring-handler
