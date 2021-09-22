@@ -1,6 +1,7 @@
 (ns users.core
   (:require
    [buddy.hashers :as hashers]
+   ;;[clojure.pprint :refer [pprint]]
    [muuntaja.middleware :as muuntaja]
    [reitit.ring :as reitit]
    [ring.adapter.jetty :as jetty]
@@ -14,8 +15,8 @@
     {:get
      (fn [_] (response/ok (db/list-users)))
      :post
-     (fn [params]
-       (println "req:" params)
+     (fn [{params :body-params}]
+       ;;(pprint params)
        (response/ok
         (db/create-user! (update params :password hashers/derive))))
      :put
