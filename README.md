@@ -6,11 +6,8 @@ private training about clojure/reitit/next.jdbc and github.
 
 ```shell
 $ createdb --owner postgres users
-
 $ psql -U postgres -W users < initdb.d/up.sql
-
 $ lein run
-
 $ sh initdb.d/seed.sh
 
 $ http :3000/users
