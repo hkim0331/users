@@ -11,6 +11,7 @@
                  [com.github.seancorfield/next.jdbc "1.2.709"]
                  [org.clojure/clojure "1.10.3"]
                  [org.postgresql/postgresql "42.2.23"]
-                 [ring/ring "1.9.4"]]
+                 [ring/ring "1.9.4"]
+                 [com.taoensso/timbre "5.1.2"]]
   :repl-options {:init-ns users.core}
   :main users.core)
