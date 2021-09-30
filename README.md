@@ -2,15 +2,16 @@
 
 API for users database.
 
-Private training about clojure/reitit/next.jdbc and github usage.
+Private training about clojure, reitit, next.jdbc and github.
 
 ## Usage
 
 ```shell
 $ createdb --owner postgres users
 $ psql -U postgres -W users < initdb.d/up.sql
-$ lein run
 $ sh initdb.d/seed.sh
+
+$ lein run
 
 $ http :3000/users
 $ http :3000/users sid='123' name='my name' login='acc' password='as you like'

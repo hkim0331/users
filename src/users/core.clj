@@ -11,8 +11,18 @@
    [ring.util.http-response :as response]
    [users.db :as db]
    [taoensso.timbre :as timbre :refer [debug]])
- (:gen-class
+ (:gen-class))
 
+(def routes
+  [["/users"
+    {:get
+     (fn [_] (response/ok (db/list-users)))
+     :post
+     (fn [req]
+       (let [params (:body-params req)]
+         (response/ok {:body-params params
+                       :params (:params req)
+                       :form-params (:form-params req)})))
         ;;  (debug "body-params" params)
         ;;  (debug "params" (:params req))))
         ;;  (response/ok
@@ -21,14 +31,14 @@
      (fn [{params :body-params}]
        (response/ok
         (db/update-user! (params :login)
-                         (update params :password hashers/derive))))
+                         (update params :password hashers/derive))))}]
    ["/users/:login"
     {:get
      (fn [{{:keys [login]} :path-params}]
        (response/ok (db/find-user login)))
      :delete
      (fn [{{:keys [login]} :path-params}]
-       (response/ok (db/delete-user! login)))}]))
+       (response/ok (db/delete-user! login)))}]])
 
 (def handler
   (reitit/ring-handler
