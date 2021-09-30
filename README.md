@@ -1,6 +1,8 @@
 # USERS
 
-private training about clojure/reitit/next.jdbc and github.
+API for users database.
+
+Private training about clojure/reitit/next.jdbc and github usage.
 
 ## Usage
 

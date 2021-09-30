@@ -6,31 +6,29 @@
    [reitit.ring :as reitit]
    [ring.adapter.jetty :as jetty]
    [ring.middleware.reload :refer [wrap-reload]]
+   [ring.middleware.params :refer [wrap-params]]
+   [ring.middleware.keyword-params :refer [wrap-keyword-params]]
    [ring.util.http-response :as response]
-   [users.db :as db])
- (:gen-class))
+   [users.db :as db]
+   [taoensso.timbre :as timbre :refer [debug]])
+ (:gen-class
 
-(def routes
-  [["/users"
-    {:get
-     (fn [_] (response/ok (db/list-users)))
-     :post
-     (fn [{params :body-params}]
-       ;;(pprint params)
-       (response/ok
-        (db/create-user! (update params :password hashers/derive))))
+        ;;  (debug "body-params" params)
+        ;;  (debug "params" (:params req))))
+        ;;  (response/ok
+        ;;   (db/create-user! (update params :password hashers/derive)))))
      :put
      (fn [{params :body-params}]
        (response/ok
         (db/update-user! (params :login)
-                      (update params :password hashers/derive))))}]
+                         (update params :password hashers/derive))))
    ["/users/:login"
     {:get
      (fn [{{:keys [login]} :path-params}]
        (response/ok (db/find-user login)))
      :delete
      (fn [{{:keys [login]} :path-params}]
-       (response/ok (db/delete-user! login)))}]])
+       (response/ok (db/delete-user! login)))}]))
 
 (def handler
   (reitit/ring-handler
